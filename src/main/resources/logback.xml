@@ -1,0 +1,30 @@
+<configuration packagingData="true">
+    <property name="LOG_HOME" value="${user.dir}/log" />
+
+    <appender name="FILE" class="ch.qos.logback.core.FileAppender">
+        <file>${LOG_HOME}/myApp.log</file>
+        <encoder>
+            <pattern>%date %level [%thread] %logger{10} [%file:%line] %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>${HOSTNAME} %date %level [%thread] %logger{10} [%file:%line] %msg%n</pattern>
+        </encoder>
+    </appender>
+    <logger name="df.util" level="debug">
+    </logger>
+    <logger name="df" level="debug" additivity="false">
+        <appender-ref ref="STDOUT"/>
+    </logger>
+
+    <logger name="org.springframework" level="warn"></logger>
+    <logger name="org.mybatis" level="warn"></logger>
+    <logger name="io.netty" level="warn"></logger>
+
+    <root level="error">
+        <appender-ref ref="FILE"/>
+        <appender-ref ref="STDOUT"/>
+    </root>
+</configuration>

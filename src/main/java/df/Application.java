@@ -1,6 +1,7 @@
 package df;
 
 import df.mybatis.mapper.SeqMapper;
+import df.util.XmlUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
 import org.springframework.data.redis.core.StringRedisTemplate;
 
+import java.util.Iterator;
+import java.util.Properties;
 import java.util.concurrent.CountDownLatch;
 
 @SpringBootApplication
@@ -37,18 +40,24 @@ public class Application implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-
-        Long b = System.currentTimeMillis();
-        Long e = System.currentTimeMillis();
-        for (int i = 0; i < 100; i++) {
-            System.out.println(this.seqMapper.getSeq());
-            e = System.currentTimeMillis();
-            if (i == 0) {
-
-                System.out.println("first time:" + (e-b) + "ms");
-            }
+        LOGGER.info("run...");
+        XmlUtil.format("I am a xmlStr");
+        Properties map = System.getProperties();
+        for(Iterator<Object> itr = map.keySet().iterator(); itr.hasNext();){
+            Object key = itr.next();
+            LOGGER.info(key + "=" + map.get(key));
         }
-        e = System.currentTimeMillis();
-        System.out.println("cost average time:" + (e-b)/100 + "ms");
+//        Long b = System.currentTimeMillis();
+//        Long e = System.currentTimeMillis();
+//        for (int i = 0; i < 100; i++) {
+//            System.out.println(this.seqMapper.getSeq());
+//            e = System.currentTimeMillis();
+//            if (i == 0) {
+//
+//                System.out.println("first time:" + (e-b) + "ms");
+//            }
+//        }
+//        e = System.currentTimeMillis();
+//        System.out.println("cost average time:" + (e-b)/100 + "ms");
     }
 }
