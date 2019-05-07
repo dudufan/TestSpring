@@ -35,5 +35,8 @@ targetCompatibility = 1.8
 dependencies {
     compile("org.springframework.boot:spring-boot-starter")
     compile("org.springframework.boot:spring-boot-starter-data-redis")
+    compile("org.springframework.boot:spring-boot-starter-test")
+    compile "org.quartz-scheduler:quartz:2.3.0"
+    compile group: 'org.apache.shiro', name: 'shiro-core', version:'1.4.1'
     testCompile("junit:junit")
 }
