@@ -19,7 +19,6 @@ version '1.0-SNAPSHOT'
 bootJar {
     baseName = 'gs-messaging-redis'
     version =  '0.1.0'
-    launchScript()
 }
 
 repositories {
