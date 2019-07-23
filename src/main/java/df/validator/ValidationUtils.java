@@ -1,4 +1,4 @@
-package df.util;
+package df.validator;
 
 import org.hibernate.validator.HibernateValidator;
 

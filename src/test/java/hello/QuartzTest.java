@@ -1,6 +1,6 @@
 package hello;
 
-import df.HelloJob;
+import df.quartz.HelloJob;
 import org.junit.Test;
 import org.quartz.JobDetail;
 import org.quartz.Scheduler;

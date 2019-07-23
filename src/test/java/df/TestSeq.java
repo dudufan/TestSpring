@@ -1,7 +1,8 @@
 package df;
 
 import df.mybatis.mapper.SeqMapper;
-import df.util.MyValidator;
+import df.validator.MyValidator;
+import df.validator.PayRequestDto;
 import org.apache.commons.io.IOUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;

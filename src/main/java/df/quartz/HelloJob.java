@@ -1,4 +1,4 @@
-package df;
+package df.quartz;
 
 import org.quartz.Job;
 import org.quartz.JobExecutionContext;

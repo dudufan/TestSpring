@@ -1,6 +1,8 @@
-package df;
+package df.redis;
 
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.data.redis.listener.PatternTopic;
@@ -9,7 +11,8 @@ import org.springframework.data.redis.listener.adapter.MessageListenerAdapter;
 
 import java.util.concurrent.CountDownLatch;
 
-//@Configuration
+@Configuration
+@PropertySource("classpath:redis.properties")
 public class RedisConfiguration {
 
     @Bean
