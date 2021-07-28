@@ -20,7 +20,7 @@ package df.thrift.server;/*
 import org.apache.thrift.server.TServer;
 import org.apache.thrift.server.TServer.Args;
 import org.apache.thrift.server.TSimpleServer;
-import org.apache.thrift.server.TThreadPoolServer;
+import org.apache.thrift.transport.TFramedTransport;
 import org.apache.thrift.transport.TSSLTransportFactory;
 import org.apache.thrift.transport.TServerSocket;
 import org.apache.thrift.transport.TServerTransport;
@@ -29,8 +29,6 @@ import org.apache.thrift.transport.TSSLTransportFactory.TSSLTransportParameters;
 // Generated code
 import df.thrift.tutorial.*;
 import df.thrift.shared.*;
-
-import java.util.HashMap;
 
 public class JavaServer {
 
@@ -64,7 +62,10 @@ public class JavaServer {
   public static void simple(Calculator.Processor processor) {
     try {
       TServerTransport serverTransport = new TServerSocket(9090);
-      TServer server = new TSimpleServer(new Args(serverTransport).processor(processor));
+//      Args args = new Args(serverTransport).processor(processor);
+      Args args = new Args(serverTransport).processor(processor).protocolFactory(new TBidCompactProtocol.Factory());
+      args.transportFactory(new TFramedTransport.Factory());
+      TServer server = new TSimpleServer(args);
 
       // Use this for a multithreaded server
       // TServer server = new TThreadPoolServer(new TThreadPoolServer.Args(serverTransport).processor(processor));

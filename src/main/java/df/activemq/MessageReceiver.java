@@ -8,11 +8,11 @@ import org.springframework.stereotype.Component;
 @Component
 public class MessageReceiver {
 
-	@Autowired
+	@Autowired(required = false)
 	JmsTemplate jmsTemplate;
 
 //	@JmsListener(destination = "mytopic", containerFactory = "topicJmsListenerContainerFactory")
-	@JmsListener(destination = "mytopic1", containerFactory = "myFactory")
+//	@JmsListener(destination = "mytopic1", containerFactory = "myFactory")
 	public void processMessage(String content) {
 		System.out.println("收到 " + content);
 	}

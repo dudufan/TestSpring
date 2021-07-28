@@ -23,16 +23,16 @@ import df.thrift.tutorial.*;
 import df.thrift.shared.*;
 
 import org.apache.thrift.TException;
+import org.apache.thrift.transport.TFramedTransport;
 import org.apache.thrift.transport.TSSLTransportFactory;
 import org.apache.thrift.transport.TTransport;
 import org.apache.thrift.transport.TSocket;
 import org.apache.thrift.transport.TSSLTransportFactory.TSSLTransportParameters;
-import org.apache.thrift.protocol.TBinaryProtocol;
 import org.apache.thrift.protocol.TProtocol;
 
 public class JavaClient {
   public static void main(String [] args) {
-
+    args = new String[]{"simple"};
     if (args.length != 1) {
       System.out.println("Please enter 'simple' or 'secure'");
       System.exit(0);
@@ -42,6 +42,7 @@ public class JavaClient {
       TTransport transport;
       if (args[0].contains("simple")) {
         transport = new TSocket("localhost", 9090);
+        transport = new TFramedTransport(transport);
         transport.open();
       }
       else {
@@ -60,7 +61,8 @@ public class JavaClient {
         transport = TSSLTransportFactory.getClientSocket("localhost", 9091, 0, params);
       }
 
-      TProtocol protocol = new  TBinaryProtocol(transport);
+//      TProtocol protocol = new TBidBinaryProtocol(transport);
+      TProtocol protocol = new TBidCompactProtocol(transport);
       Calculator.Client client = new Calculator.Client(protocol);
 
       perform(client);

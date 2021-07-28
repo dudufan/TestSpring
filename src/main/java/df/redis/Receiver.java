@@ -11,7 +11,7 @@ public class Receiver {
 
     private CountDownLatch latch;
 
-    @Autowired
+    @Autowired(required = false)
     public Receiver(CountDownLatch latch) {
         this.latch = latch;
     }

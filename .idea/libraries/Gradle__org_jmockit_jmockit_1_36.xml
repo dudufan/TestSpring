@@ -1,0 +1,15 @@
+<component name="libraryTable">
+  <library name="Gradle: org.jmockit:jmockit:1.36">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/../../../Test/.gradle/caches/modules-2/files-2.1/org.jmockit/jmockit/1.36/1352f1467a624a02eaa899d3027048d723d417de/jmockit-1.36.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../../.gradle/caches/modules-2/files-2.1/org.jmockit/jmockit/1.36/1352f1467a624a02eaa899d3027048d723d417de/jmockit-1.36.jar!/" />
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jmockit/jmockit/1.36/1352f1467a624a02eaa899d3027048d723d417de/jmockit-1.36.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$PROJECT_DIR$/../../../Test/.gradle/caches/modules-2/files-2.1/org.jmockit/jmockit/1.36/b5c39f18c91e037ee4d5c9996620af4efd70014b/jmockit-1.36-sources.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../../.gradle/caches/modules-2/files-2.1/org.jmockit/jmockit/1.36/b5c39f18c91e037ee4d5c9996620af4efd70014b/jmockit-1.36-sources.jar!/" />
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jmockit/jmockit/1.36/b5c39f18c91e037ee4d5c9996620af4efd70014b/jmockit-1.36-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

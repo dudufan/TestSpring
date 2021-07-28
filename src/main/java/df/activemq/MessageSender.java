@@ -10,7 +10,7 @@ import javax.jms.Destination;
 @Component
 public class MessageSender {
 
-	@Autowired
+	@Autowired(required = false)
 	JmsTemplate jmsTemplate;
 
 	public void sendMessage(String message) {

@@ -30,7 +30,6 @@ namespace java shared
 namespace perl shared
 namespace php shared
 namespace haxe shared
-namespace netcore shared
 namespace netstd shared
 
 
@@ -39,6 +38,11 @@ struct SharedStruct {
   2: string value
 }
 
+struct Attach {
+  1: map<string,string> headers
+}
+
 service SharedService {
-  SharedStruct getStruct(1: i32 key)
+  SharedStruct getStruct(1: i32 key);
+  SharedStruct setAttach(1: Attach attachInfo);
 }

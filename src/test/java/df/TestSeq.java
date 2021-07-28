@@ -57,7 +57,7 @@ public class TestSeq {
     @Test
     public void testHttp() throws MalformedURLException {
         logger.info("Enter testHttp...");
-        Resource resource = new UrlResource("https://ss0.bdstatic.com/5aV1bjqh_Q23odCf/static/superman/css/super_min_e8edd1e3.css");
+        Resource resource = new UrlResource("https://ss0.bdstatic.com/5aV1bjqh_Q23odCf/statickeyword/superman/css/super_min_e8edd1e3.css");
         try {
 //            byte[] buffer = new byte[102400];
 //            int ret = IOUtils.read(resource.getInputStream(), buffer);

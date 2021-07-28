@@ -22,10 +22,13 @@ import org.apache.thrift.TException;
 // Generated code
 import df.thrift.tutorial.*;
 import df.thrift.shared.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.HashMap;
 
 public class CalculatorHandler implements Calculator.Iface {
+  private Logger logger = LoggerFactory.getLogger(CalculatorHandler.class);
 
   private HashMap<Integer,SharedStruct> log;
 
@@ -38,7 +41,8 @@ public class CalculatorHandler implements Calculator.Iface {
   }
 
   public int add(int n1, int n2) {
-    System.out.println("add(" + n1 + "," + n2 + ")");
+//    System.out.println("add(" + n1 + "," + n2 + ")");
+    logger.info("add {} + {}", n1, n2);
     return n1 + n2;
   }
 

@@ -1,16 +1,14 @@
 package hello;
 
-import df.quartz.HelloJob;
+import df.quartz.MailJob;
+import df.quartz.StoppableJob;
 import org.junit.Test;
-import org.quartz.JobDetail;
-import org.quartz.Scheduler;
-import org.quartz.SchedulerException;
-import org.quartz.Trigger;
+import org.quartz.*;
 import org.quartz.impl.StdSchedulerFactory;
-import org.springframework.util.CollectionUtils;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 import static org.quartz.JobBuilder.newJob;
 import static org.quartz.SimpleScheduleBuilder.simpleSchedule;
@@ -18,38 +16,66 @@ import static org.quartz.TriggerBuilder.newTrigger;
 
 public class QuartzTest {
     @Test
-    public void simpleTest() {
-        Set<String> set = new HashSet<>();
-        set.add(null);
-        if (CollectionUtils.isEmpty(set)) {
-            System.out.println("null");
-        }
+    public void simpleTest() throws InterruptedException, SchedulerException {
+        //创建调度器
+        Scheduler scheduler = StdSchedulerFactory.getDefaultScheduler();
+        Date startTime = DateBuilder.nextGivenSecondDate(null, 8);
 
-        String mcode = "1";
-        if ("cc".endsWith(mcode)) {
-            System.out.println("Hello!");
-        }
-        // Grab the Scheduler instance from the Factory
-        Scheduler scheduler = null;
-        try {
-            scheduler = StdSchedulerFactory.getDefaultScheduler();
-            // and start it off
-            scheduler.start();
+        //定义一个触发器
+        Trigger trigger = newTrigger().withIdentity("trigger1", "group1") //定义名称和所属的组
+                .startAt(startTime)
+                .withSchedule(simpleSchedule()
+                        .withIntervalInSeconds(2) //每隔2秒执行一次
+                        .withRepeatCount(10)) //总共执行11次(第一次执行不基数)
+                .build();
 
-            JobDetail job = newJob(HelloJob.class).withIdentity("job1","group1").build();
-            Trigger trigger = newTrigger().withIdentity("trigger1","group1").withSchedule(simpleSchedule().withIntervalInSeconds(3).repeatForever()).build();
-            // Tell quartz to schedule the job using our trigger
-            scheduler.scheduleJob(job, trigger);
+        //定义一个JobDetail
+        JobDetail job = newJob(MailJob.class) //指定干活的类MailJob
+                .withIdentity("mailjob1", "mailgroup") //定义任务名称和分组
+                .usingJobData("email", "admin@10086.com") //定义属性
+                .build();
 
-            try {
-                Thread.sleep(60000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            scheduler.shutdown();
-        } catch (SchedulerException e) {
-            e.printStackTrace();
-        }
+        //调度加入这个job
+        scheduler.scheduleJob(job, trigger);
+
+        //启动
+        scheduler.start();
+
+        //等待20秒，让前面的任务都执行完了之后，再关闭调度器
+        Thread.sleep(20000);
+        scheduler.shutdown(true);
 
     }
+
+    @Test
+    public void interrupt() throws InterruptedException, SchedulerException {
+        //创建调度器
+        Scheduler scheduler = StdSchedulerFactory.getDefaultScheduler();
+
+        //定义一个触发器
+        Trigger trigger = newTrigger().withIdentity("trigger1", "group1") //定义名称和所属的组
+                .startNow()
+                .build();
+
+        //定义一个JobDetail
+        JobDetail job = newJob(StoppableJob.class) //指定干活的类MailJob
+                .withIdentity("exceptionJob1", "someJobGroup") //定义任务名称和分组
+                .build();
+
+        //调度加入这个job
+        scheduler.scheduleJob(job, trigger);
+
+        //启动
+        scheduler.start();
+
+        Thread.sleep(5000);
+        System.out.println("过5秒，调度停止 job");
+        System.out.println(job.getKey());
+        scheduler.interrupt(job.getKey());
+        //等待20秒，让前面的任务都执行完了之后，再关闭调度器
+        Thread.sleep(20000);
+        scheduler.shutdown(true);
+
+    }
+
 }

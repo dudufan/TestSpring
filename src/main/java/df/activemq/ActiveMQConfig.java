@@ -17,7 +17,7 @@ import javax.jms.ConnectionFactory;
 import javax.jms.Queue;
 import javax.jms.Topic;
 
-@Configuration
+//@Configuration
 @EnableJms
 public class ActiveMQConfig {
 //    @Bean
