@@ -14,16 +14,17 @@ import java.util.Date;
 @Builder
 public class CheckReq {
     @NotEmpty(message = "日期格式不正确")
-    private String startTime;
+    @DateTime
+    public String startTime;
 
-    public void setStartTime(String startTime) {
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        try {
-            sdf.parse(startTime);
-            this.startTime = startTime;
-        } catch (ParseException e) {
-            e.printStackTrace();
-            this.startTime = null;
-        }
-    }
+//    public void setStartTime(String startTime) {
+//        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+//        try {
+//            sdf.parse(startTime);
+//            this.startTime = startTime;
+//        } catch (ParseException e) {
+//            e.printStackTrace();
+//            this.startTime = null;
+//        }
+//    }
 }

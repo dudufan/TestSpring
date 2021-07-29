@@ -12,12 +12,13 @@ import java.lang.annotation.Target;
  */
 @Target({ ElementType.FIELD})
 @Retention(RetentionPolicy.RUNTIME)
-@Constraint(validatedBy = DatetimeValidator.class)
-public @interface Datetime {
+@Constraint(validatedBy = DateTimeValidator.class)
+public @interface DateTime {
 
-    String message() default "性别有误";
+    String message() default "日期格式不是YY-MM-dd HH:mm:ss";
 
     Class<?>[] groups() default { };
 
     Class<? extends Payload>[] payload() default { };
+    String formatter() default "YY-MM-dd HH:mm:ss";
 }
